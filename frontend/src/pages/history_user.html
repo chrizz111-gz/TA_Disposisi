@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat - User</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/history.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <img src="../assets/logo.png" class="logo">
+        <h2>DISPOSISI SURAT</h2>
+    </header>
+
+    <div class="history-container">
+
+        <!-- HEADER FITUR -->
+        <div class="history-header">
+
+            <!-- TAB: User hanya punya Surat Masuk -->
+            <div class="tabs">
+                <button class="tab active" data-jenis="semua">📄 Semua Surat</button>
+                <button class="tab" data-jenis="masuk">📥 Surat Masuk</button>
+            </div>
+
+            <!-- SEARCH + FILTER + JABATAN -->
+            <div class="tools">
+                <input type="text" placeholder="Cari surat..." class="search">
+
+                <input type="date" id="filterTanggal" class="filter">
+
+                <select class="filter" id="filterSort">
+                    <option value="terbaru">Terbaru</option>
+                    <option value="terlama">Terlama</option>
+                </select>
+
+                <!-- 🔥 FILTER JABATAN BARU -->
+                <select class="filter" id="filterJabatan">
+                    <option value="semua">Semua Jabatan</option>
+                    <!-- Diisi otomatis dari JS -->
+                </select>
+
+            </div>
+
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Jenis Surat</th>
+                        <th>Tanggal</th>
+                        <th>Waktu</th>
+                        <th>Nomor</th>
+                        <th>Asal</th>
+                        <th>Perihal</th>
+                        <th>Jabatan</th> <!-- 🔥 KOLOM JABATAN BARU -->
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- ================= HAMBURGER ================= -->
+    <button id="toggleSidebar" class="hamburger" aria-label="Toggle Sidebar">
+        III
+    </button>
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside id="sidebar" class="sidebar hidden">
+        <a href="home_user.html" class="side-btn">
+            BERANDA <img src="../assets/home.png" alt="">
+        </a>
+
+        <a href="profile_user.html" class="side-btn">
+            PENGGUNA <img src="../assets/user.png" alt="">
+        </a>
+
+        <a href="history_user.html" class="side-btn">
+            RIWAYAT <img src="../assets/history.png" alt="">
+        </a>
+    </aside>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/history_user.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Akun</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/usermanage.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <img src="../assets/logo.png" class="logo" alt="Logo">
+        <h2>DISPOSISI SURAT</h2>
+    </header>
+
+    <button id="toggleSidebar" class="hamburger" aria-label="Toggle Sidebar">III</button>
+
+    <div class="wrapper manage-bg">
+
+        <aside id="sidebar" class="sidebar hidden">
+            <a href="home.html" class="side-btn">BERANDA <img src="../assets/home.png" alt=""></a>
+            <a href="profile.html" class="side-btn">PENGGUNA <img src="../assets/user.png" alt=""></a>
+            <a href="suratmasuk.html" class="side-btn">SURAT MASUK <img src="../assets/in.png" alt=""></a>
+            <a href="suratkeluar.html" class="side-btn">SURAT KELUAR <img src="../assets/out.png" alt=""></a>
+            <a href="history.html" class="side-btn">RIWAYAT <img src="../assets/history.png" alt=""></a>
+            <a href="usermanage.html" class="side-btn">MANAJEMEN AKUN <img src="../assets/users.png" alt=""></a>
+        </aside>
+
+        <main class="content">
+
+            <div class="manage-header">
+                <h1 class="page-title">DAFTAR AKUN</h1>
+                <input type="text" id="searchInput" class="search-box" placeholder="Cari akun...">
+            </div>
+
+            <div class="manage-list" id="userList">
+                <p class="loading-text">Memuat data...</p>
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="pagination-wrapper" id="paginationContainer"></div>
+
+            <div class="manage-footer">
+                <button class="btn-log" onclick="window.location.href='log.html'">Riwayat Aktivitas</button>
+                <button class="btn-tambah" onclick="window.location.href='register.html'">Tambah Akun</button>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- CUSTOM ALERT POPUP -->
+    <div id="customAlert" class="custom-alert" style="display:none;">
+        <div class="alert-box">
+            <div class="alert-icon">&#9888;</div>
+            <p id="alertMessage"></p>
+            <button onclick="closeAlert()">OK</button>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/usermanage.js"></script>
+</body>
+
+</html>

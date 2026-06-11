@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Surat - Waka</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/disposisi_masuk.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <img src="../assets/logo.png" class="logo" alt="Logo">
+        <h2>DISPOSISI SURAT</h2>
+    </header>
+
+    <div class="container-detail">
+        <h2 class="title">DETAIL SURAT MASUK</h2>
+
+        <div class="detail-wrapper">
+
+            <!-- KOLOM KIRI -->
+            <div class="left-panel">
+                <div class="card surat-preview">
+                    <h3>Informasi Surat</h3>
+                    <div class="surat-item">
+                        <div class="item-row">
+                            <span class="label">Nomor Surat</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valNoSurat">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Tanggal</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valTanggal">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Asal</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valAsal">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Perihal</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valPerihal">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Lampiran</span>
+                            <span class="separator">:</span>
+                            <span class="value">1 Berkas PDF</span>
+                        </div>
+                    </div>
+
+                    <div class="lampiran-box" id="lampiranBox">
+                        <p>Memuat lampiran...</p>
+                    </div>
+
+                    <div class="left-button-area">
+                        <button class="btn-back" id="btnKembali">← Kembali</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KOLOM KANAN -->
+            <div class="right-panel">
+                <div class="card">
+                    <h3>Catatan dari Kepala Sekolah</h3>
+
+                    <div class="form-group">
+                        <label>Diverifikasi Oleh</label>
+                        <input type="text" id="valKepsek" readonly
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3)">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tanggal Keputusan</label>
+                        <input type="text" id="valApprovalAt" readonly
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3)">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Catatan Kepsek</label>
+                        <textarea id="valCatatanKepsek" readonly rows="2"
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);resize:none"
+                            placeholder="-"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tanggapan / Saran</label>
+                        <textarea id="valTanggapan" readonly rows="2"
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);resize:none"
+                            placeholder="-"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Proses Lebih Lanjut</label>
+                        <textarea id="valProses" readonly rows="2"
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);resize:none"
+                            placeholder="-"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Koordinasi / Konfirmasi</label>
+                        <textarea id="valKoordinasi" readonly rows="2"
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);resize:none"
+                            placeholder="-"></textarea>
+                    </div>
+
+                    <!-- Form tindak lanjut waka — hanya muncul kalau status menunggu_waka -->
+                    <div id="formWaka" style="display:none;">
+                        <hr style="border-color:rgba(255,255,255,0.2);margin:16px 0;">
+                        <h3 style="margin-bottom:12px;">Tindak Lanjut Waka</h3>
+
+                        <div class="form-group">
+                            <label>Pilih User Penerima</label>
+                            <div id="userCheckboxes" style="width:100%; max-height:160px; overflow-y:auto; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.3);
+                                background:rgba(0,0,0,0.35); color:white; font-size:14px; display:flex; flex-direction:column; gap:10px; margin-top:4px; box-shadow: inset 0 2px 6px rgba(0,0,0,0.35);">
+                                <!-- Checkboxes will be dynamically rendered here -->
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Catatan untuk Penerima <span
+                                    style="opacity:0.6;font-size:12px;">(opsional)</span></label>
+                            <textarea id="catatanWaka" rows="3"
+                                style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);resize:none"
+                                placeholder="Tulis catatan untuk penerima surat..."></textarea>
+                        </div>
+
+                        <div class="button-group" style="margin-top:16px;">
+                            <button class="btn-kembali" id="btnTeruskan">→ Teruskan ke User</button>
+                        </div>
+                    </div>
+
+                    <!-- Info sudah diteruskan -->
+                    <div id="infoSudahTeruskan" style="display:none;margin-top:16px;">
+                        <div style="background:rgba(60,193,95,0.2);border:1px solid rgba(60,193,95,0.5);
+                            border-radius:8px;padding:12px 16px;color:#3CC15F;font-size:14px;">
+                            ✓ Surat sudah diteruskan ke user penerima
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert" style="display:none;">
+        <div class="alert-box">
+            <p id="alertMessage"></p>
+            <button onclick="closeAlert()">OK</button>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/detail_waka.js"></script>
+
+</body>
+
+</html>

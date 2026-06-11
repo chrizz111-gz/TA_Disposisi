@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Pengguna</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <style>
+        /* CSS tambahan khusus untuk panduan agar serasi dengan glassmorphism */
+        .guide-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            color: white;
+            padding-bottom: 40px;
+        }
+
+        .guide-container h2 {
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        
+        .role-header {
+            margin-bottom: 25px;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+
+        .role-header strong {
+            color: #6FBCE1;
+        }
+
+        /* Alur Flow */
+        .flow-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 24px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 4px solid rgba(255, 255, 255, 0.55);
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .flow-title {
+            width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+            color: #6FBCE1;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+
+        .flow-steps-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .flow-step {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            white-space: nowrap;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+            color: white;
+        }
+
+        .flow-arrow {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+
+        /* Accordion List */
+        .accordion-card {
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 4px solid rgba(255, 255, 255, 0.55);
+            padding: 10px 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+
+        .accordion-header {
+            width: 100%;
+            padding: 18px 0;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .accordion-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.8);
+            background: transparent;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+
+        .accordion-header.active .accordion-num {
+            background: white;
+            color: #2B6F8B;
+            border-color: white;
+            text-shadow: none;
+        }
+
+        .accordion-title {
+            flex: 1;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+
+        .accordion-icon {
+            font-size: 14px;
+            transition: transform 0.25s ease;
+            color: rgba(255, 255, 255, 0.7);
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-inner {
+            padding-bottom: 20px;
+            padding-left: 42px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .step-row {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+
+        .step-bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        /* Tips Box */
+        .tips-box {
+            padding: 20px 24px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 4px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .tips-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #e84848;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+
+        .tip-item {
+            font-size: 13.5px;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 6px 0;
+            line-height: 1.6;
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <img src="../assets/logo.png" class="logo" alt="Logo">
+        <h2>DISPOSISI SURAT</h2>
+    </header>
+
+    <button id="toggleSidebar" class="hamburger" aria-label="Toggle Sidebar">III</button>
+
+    <div class="wrapper">
+        <aside id="sidebar" class="sidebar hidden">
+            <!-- Sidebar diisi dinamis oleh panduan.js -->
+        </aside>
+
+        <main class="content" style="overflow-y: auto; max-height: calc(100vh - 60px); width: 100%;">
+            <div class="guide-container">
+                <h2 style="font-size: 26px; font-weight: bold; margin-bottom: 8px; text-shadow: 1px 1px 4px rgba(0,0,0,0.4);">
+                    Panduan Pengguna
+                </h2>
+                <div class="role-header" id="roleLabel">
+                    Panduan penggunaan sistem E-Disposisi untuk peran <strong>-</strong>
+                </div>
+
+                <!-- Alur Disposisi Surat -->
+                <div class="flow-container" id="flowContainer">
+                    <div class="flow-title">Alur Disposisi Surat</div>
+                    <div class="flow-steps-wrapper" id="flowSteps"></div>
+                </div>
+
+                <!-- Panduan Langkah Accordion -->
+                <div class="accordion-card" id="accordionCard">
+                    <!-- Langkah panduan dinamis -->
+                </div>
+
+                <!-- Tips Keamanan -->
+                <div class="tips-box">
+                    <div class="tips-title">Tips Keamanan</div>
+                    <p class="tip-item">• Jangan bagikan kata sandi Anda kepada siapapun.</p>
+                    <p class="tip-item">• Gunakan kata sandi yang kuat: minimal 8 karakter dengan huruf besar, kecil, dan angka.</p>
+                    <p class="tip-item">• Selalu logout setelah selesai, terutama di komputer bersama.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <!-- Kita muat sidebar.js tapi tidak gunakan dynamic inject miliknya karena panduan.html mengisi sidebar secara custom -->
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/panduan.js"></script>
+</body>
+</html>

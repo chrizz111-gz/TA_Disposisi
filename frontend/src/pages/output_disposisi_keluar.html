@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output Disposisi Surat Keluar</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/disposisi_keluar.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <img src="../assets/logo.png" class="logo" alt="Logo">
+        <h2>DISPOSISI SURAT</h2>
+    </header>
+
+    <div class="container-detail">
+        <h2 class="title">OUTPUT SURAT KELUAR</h2>
+
+        <div class="detail-wrapper">
+
+            <!-- KOLOM KIRI -->
+            <div class="left-panel">
+                <div class="card surat-preview">
+                    <h3>Surat Keluar</h3>
+                    <div class="surat-item">
+                        <div class="item-row">
+                            <span class="label">No Surat</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valNoSurat">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Kode</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valKode">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Dari</span>
+                            <span class="separator">:</span>
+                            <span class="value">SMK NEGERI 2 SINGOSARI</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Perihal</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valPerihal">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Tujuan</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valTujuan">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Tanggal</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valTanggal">-</span>
+                        </div>
+                    </div>
+
+                    <div class="lampiran-box" id="lampiranBox">
+                        <p>Lihat Lampiran (PDF)</p>
+                    </div>
+
+                    <div class="left-button-area">
+                        <button class="btn-back" id="btnKembali">← Kembali</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KOLOM KANAN -->
+            <div class="right-panel">
+                <div class="card">
+                    <h3>Hasil Keputusan Kepsek</h3>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <div id="valStatus" style="
+                            display: inline-block;
+                            padding: 6px 16px;
+                            border-radius: 20px;
+                            font-weight: bold;
+                            background: #E8C048;
+                            color: white;
+                            font-size: 14px;
+                        ">Menunggu</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Diproses Oleh</label>
+                        <input type="text" id="valKepsek" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tanggal Diproses</label>
+                        <input type="text" id="valApprovalAt" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Catatan Kepsek</label>
+                        <textarea id="valCatatan" readonly style="min-height:120px"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/output_disposisi_keluar.js"></script>
+
+</body>
+
+</html>

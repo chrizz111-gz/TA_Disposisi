@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Surat Masuk</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/suratmasuk.css">
+</head>
+
+<body>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <img src="../assets/logo.png" class="logo">
+        <h2>DISPOSISI SURAT</h2>
+    </header>
+
+    <!-- HAMBURGER -->
+    <button id="toggleSidebar" class="hamburger" aria-label="Toggle Sidebar">
+        III
+    </button>
+
+    <!-- WRAPPER -->
+    <div class="wrapper">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="sidebar hidden">
+            <a href="home.html" class="side-btn">
+                BERANDA <img src="../assets/home.png" alt="">
+            </a>
+            <a href="profile.html" class="side-btn">
+                PENGGUNA <img src="../assets/user.png" alt="">
+            </a>
+            <a href="suratmasuk.html" class="side-btn">
+                SURAT MASUK <img src="../assets/in.png" alt="">
+            </a>
+            <a href="suratkeluar.html" class="side-btn">
+                SURAT KELUAR <img src="../assets/out.png" alt="">
+            </a>
+            <a href="history.html" class="side-btn">
+                RIWAYAT <img src="../assets/history.png" alt="">
+            </a>
+            <a href="usermanage.html" class="side-btn">
+                MANAJEMEN AKUN <img src="../assets/users.png" alt="">
+            </a>
+        </aside>
+
+        <!-- CONTENT -->
+        <main class="content">
+
+            <div class="form-box">
+                <div class="form-title">SURAT MASUK</div>
+
+                <form onsubmit="return false;">
+
+                    <label>Dari</label>
+                    <input type="text" id="asalSurat" placeholder="Masukkan Pengirim Surat">
+
+                    <label>No Surat</label>
+                    <input type="text" id="noSurat" placeholder="Masukkan Nomor Surat">
+
+                    <label>Hal / Perihal</label>
+                    <input type="text" id="perihalSurat" placeholder="Masukkan Perihal Surat">
+
+                    <label>Tanggal Surat</label>
+                    <input type="date" id="tanggalSurat">
+
+                </form>
+
+                <!-- Input file tersembunyi -->
+                <input type="file" id="fileSurat" accept=".pdf" style="display:none;">
+
+                <!-- Preview nama file -->
+                <div class="preview-box"></div>
+
+                <div class="button-row">
+                    <button type="button" class="upload-btn" id="btnUpload">Unggah PDF</button>
+                    <button type="button" class="submit-btn" id="btnSubmit">Kirim</button>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- CUSTOM ALERT POPUP -->
+    <div id="customAlert" class="custom-alert" style="display:none;">
+        <div class="alert-box">
+            <div class="alert-icon">&#9888;</div>
+            <p id="alertMessage"></p>
+            <button onclick="closeAlert()">OK</button>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/suratmasuk.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body class="login-page">
+
+<header class="topbar">
+    <img src="../assets/logo.png" class="logo" alt="Logo">
+    <h2>DISPOSISI SURAT</h2>
+</header>
+
+<h2 class="login-title">MASUK</h2>
+
+<div class="login-container">
+
+    <form onsubmit="return false;">
+
+        <input type="email" id="email" placeholder="Surel" class="input">
+
+        <div class="password-box">
+            <input type="password" id="password" placeholder="Password" class="input">
+            <span class="show" id="togglePw"></span>
+        </div>
+
+        <p class="signup-text">
+            Lupa Password?
+            <a href="tutorial_password.html">Ganti Password</a>
+        </p>
+
+        <button type="button" class="btn-login" id="btnLogin">
+            Masuk
+        </button>
+
+    </form>
+</div>
+
+<!-- ALERT -->
+<div id="customAlert" class="custom-alert">
+    <div class="alert-box">
+        <p id="alertMessage"></p>
+        <button onclick="closeAlert()">OK</button>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="../js/login.js"></script>
+
+</body>
+</html>

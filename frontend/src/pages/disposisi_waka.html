@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disposisi Waka</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/disposisi_masuk.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <img src="../assets/logo.png" class="logo" alt="Logo">
+        <h2>DISPOSISI SURAT</h2>
+    </header>
+
+    <div class="container-detail">
+        <h2 class="title">DETAIL SURAT MASUK</h2>
+
+        <div class="detail-wrapper">
+
+            <!-- KOLOM KIRI -->
+            <div class="left-panel">
+                <div class="card surat-preview">
+                    <h3>Informasi Surat</h3>
+
+                    <div class="surat-grid">
+                        <div class="surat-col">
+                            <div class="item-row">
+                                <span class="label">Nomor Surat</span>
+                                <span class="separator">:</span>
+                                <span class="value" id="valNoSurat">-</span>
+                            </div>
+                            <div class="item-row">
+                                <span class="label">Tanggal</span>
+                                <span class="separator">:</span>
+                                <span class="value" id="valTanggal">-</span>
+                            </div>
+                        </div>
+                        <div class="surat-col">
+                            <div class="item-row">
+                                <span class="label">Asal</span>
+                                <span class="separator">:</span>
+                                <span class="value" id="valAsal">-</span>
+                            </div>
+                            <div class="item-row">
+                                <span class="label">Perihal</span>
+                                <span class="separator">:</span>
+                                <span class="value" id="valPerihal">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lampiran-box" id="lampiranBox">
+                        <p>Memuat lampiran...</p>
+                    </div>
+
+                    <!-- Catatan dari Kepsek -->
+                    <div style="margin-top:16px;">
+                        <h3 style="margin-bottom:10px;">Catatan dari Kepala Sekolah</h3>
+                        <div class="item-row">
+                            <span class="label">Catatan</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valCatatanKepsek">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Tanggapan & Saran</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valTanggapan">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Proses Lanjut</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valProses">-</span>
+                        </div>
+                    </div>
+
+                    <div class="left-button-area">
+                        <button class="btn-back" id="btnKembali">← Kembali</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KOLOM KANAN -->
+            <div class="right-panel">
+                <div class="card">
+                    <h3>Tindakan Waka</h3>
+
+                    <!-- Catatan Waka (opsional) -->
+                    <div class="form-group">
+                        <label>Catatan Waka <span style="opacity:0.6;font-size:12px;">(opsional)</span></label>
+                        <textarea id="catatanWaka" placeholder="Masukkan catatan tambahan dari waka..."></textarea>
+                    </div>
+
+                    <!-- Pilih User Penerima -->
+                    <div class="form-group">
+                        <label>Teruskan ke User</label>
+                        <input type="text" id="searchUser" placeholder="Ketik untuk cari user..."
+                            style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.3);
+                            background:rgba(255,255,255,0.15);color:white;font-size:14px;margin-bottom:8px;box-sizing:border-box;">
+                        <div id="userListContainer" style="max-height:200px;overflow-y:auto;background:#1e2a3a;
+                            border:1px solid rgba(255,255,255,0.2);border-radius:8px;margin-bottom:10px;">
+                        </div>
+                        <div id="wrapperSelectedUser" style="display:none;margin-top:8px;">
+                            <span style="background:rgba(26,115,232,0.8);color:white;padding:5px 14px;
+                                border-radius:20px;font-size:13px;">
+                                ✓ Dipilih: <span id="selectedUserName"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn-kembali" id="btnTeruskan">→ Teruskan ke User</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CUSTOM ALERT -->
+    <div id="customAlert" class="custom-alert" style="display:none;">
+        <div class="alert-box">
+            <div class="alert-icon">&#9888;</div>
+            <p id="alertMessage"></p>
+            <button onclick="closeAlert()">OK</button>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/disposisi_waka.js"></script>
+
+</body>
+
+</html>

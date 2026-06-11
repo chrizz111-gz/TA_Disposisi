@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Akun</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+
+<body class="login-page">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <img src="../assets/logo.png" class="logo" alt="logo">
+        <h2>DISPOSISI SURAT</h2>
+    </header>
+
+    <h2 class="login-title">TAMBAH AKUN</h2>
+
+    <div class="login-containers">
+
+        <form id="registerForm">
+            <!-- Surel -->
+            <label class="input-label">Surel :</label>
+            <input type="email" id="email" class="input" placeholder="Masukkan Surel...." required>
+
+            <!-- Nama -->
+            <label class="input-label">Nama :</label>
+            <input type="text" id="username" class="input" placeholder="Masukkan Nama...." required>
+
+            <!-- Kata Sandi -->
+            <label class="input-label">Kata Sandi :</label>
+            <div class="password-box">
+                <input type="password" id="password" class="input" placeholder="Masukkan Kata Sandi...." required>
+                <img src="../assets/eye.png" class="show" onclick="togglePassword('password', this)" alt="Toggle">
+            </div>
+
+            <!-- Ulangi Kata Sandi -->
+            <label class="input-label">Ulangi Kata Sandi :</label>
+            <div class="password-box">
+                <input type="password" id="confirmpass" class="input" placeholder="Masukkan Ulang Kata Sandi...."
+                    required>
+                <img src="../assets/eye.png" class="show" onclick="togglePassword('confirmpass', this)" alt="Toggle">
+            </div>
+
+            <!-- Jabatan -->
+            <label class="input-label">Jabatan :</label>
+            <div class="jabatan-section">
+                <div id="jabatanList" class="jabatan-list">
+                    <!-- Jabatan items akan ditambah di sini -->
+                </div>
+                <button type="button" class="btn-add-jabatan" onclick="addJabatanField()">
+                    + Tambah Jabatan
+                </button>
+            </div>
+
+            <!-- Error message -->
+            <p id="errorMsg" class="error-msg"></p>
+
+            <!-- 🔥 BUTTON GROUP: Kembali + SIMPAN -->
+            <div class="button-group">
+                <a href="usermanage.html" class="btn-back-form">← Kembali</a>
+                <button type="button" id="registerBtn" class="btn-login" onclick="handleRegister()">
+                    <span class="btn-text">SIMPAN</span>
+                    <span class="btn-loading" style="display:none;">Memuat...</span>
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- 🔥 PADDING BOTTOM supaya bisa scroll -->
+    <div class="bottom-spacer"></div>
+
+    <div id="customAlert" class="custom-alert" style="display:none;">
+        <div class="alert-box">
+            <p id="alertMessage"></p>
+            <button onclick="closeAlert()">OK</button>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/register.js"></script>
+
+</body>
+
+</html>

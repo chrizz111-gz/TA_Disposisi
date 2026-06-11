@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Disposisi Surat</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/disposisi_masuk.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <img src="../assets/logo.png" class="logo" alt="Logo">
+        <h2>DISPOSISI SURAT</h2>
+    </header>
+
+    <div class="container-detail">
+        <h2 class="title">HASIL DISPOSISI SURAT MASUK</h2>
+
+        <div class="detail-wrapper">
+
+            <!-- KOLOM KIRI -->
+            <div class="left-panel">
+                <div class="card surat-preview">
+                    <h3>Informasi Surat</h3>
+                    <div class="surat-item">
+                        <div class="item-row">
+                            <span class="label">Nomor Surat</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valNoSurat">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Tanggal</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valTanggal">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Asal</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valAsal">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Perihal</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valPerihal">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Lampiran</span>
+                            <span class="separator">:</span>
+                            <span class="value">1 Berkas PDF</span>
+                        </div>
+                    </div>
+
+                    <div class="lampiran-box" id="lampiranBox">
+                        <p>Memuat lampiran...</p>
+                    </div>
+
+                    <div class="left-button-area">
+                        <button class="btn-back" id="btnKembali">← Kembali</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KOLOM KANAN -->
+            <div class="right-panel">
+                <div class="card">
+                    <h3>Hasil Keputusan Kepsek</h3>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <div id="valStatus"
+                            style="padding:10px 16px;border-radius:8px;font-weight:bold;font-size:15px;color:white;background:#E8C048;display:inline-block;">
+                            Menunggu
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Diverifikasi Oleh</label>
+                        <input type="text" id="valKepsek" readonly
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3)">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tanggal Keputusan</label>
+                        <input type="text" id="valApprovalAt" readonly
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3)">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Catatan Kepsek</label>
+                        <textarea id="valCatatanKepsek" readonly rows="2"
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);resize:none"
+                            placeholder="-"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tanggapan / Saran</label>
+                        <textarea id="valTanggapan" readonly rows="2"
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);resize:none"
+                            placeholder="-"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Proses Lebih Lanjut</label>
+                        <textarea id="valProses" readonly rows="2"
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);resize:none"
+                            placeholder="-"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Koordinasi / Konfirmasi</label>
+                        <textarea id="valKoordinasi" readonly rows="2"
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);resize:none"
+                            placeholder="-"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jabatan Penerima</label>
+                        <div id="valJabatanPenerima"
+                            style="display:flex;flex-wrap:wrap;gap:6px;min-height:32px;padding:6px 0;">
+                            <span style="color:rgba(255,255,255,0.5);font-size:14px;">-</span>
+                        </div>
+                    </div>
+
+                    <!-- TAMBAH INI -->
+                    <div id="areaTeruskan" style="display:none;margin-top:20px;">
+
+                        <hr style="border-color:rgba(255,255,255,0.15);margin-bottom:16px;">
+
+                        <div class="form-group" style="margin-bottom:12px;">
+                            <label style="font-size:14px;font-weight:600;margin-bottom:8px;display:block;">
+                                Pilih Jabatan Waka Penerima
+                            </label>
+
+                            <!-- Search input -->
+                            <input type="text" id="searchJabatan" placeholder="Ketik nama jabatan waka..." style="width:100%;padding:10px 12px;border-radius:8px;
+            border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.12);
+            color:white;font-size:14px;box-sizing:border-box;outline:none;">
+
+                            <!-- Dropdown hasil search -->
+                            <div id="dropdownJabatan" style="display:none;position:relative;background:#1e2a3a;
+            border:1px solid rgba(255,255,255,0.2);border-radius:8px;
+            margin-top:4px;max-height:180px;overflow-y:auto;z-index:10;">
+                            </div>
+
+                            <!-- Tags jabatan yang dipilih -->
+                            <div id="selectedJabatans"
+                                style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;min-height:24px;">
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button class="btn-kembali" id="btnTeruskan">→ Teruskan ke Waka</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert" style="display:none;">
+        <div class="alert-box">
+            <p id="alertMessage"></p>
+            <button onclick="closeAlert()">OK</button>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/output_disposisi_masuk.js"></script>
+
+</body>
+
+</html>

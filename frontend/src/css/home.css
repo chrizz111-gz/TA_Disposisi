@@ -1,0 +1,407 @@
+/* ================== WRAPPER ================== */
+.wrapper {
+    margin-top: 60px;
+    /* ✅ samakan semua page */
+    width: 100%;
+    min-height: calc(100vh - 60px);
+
+    background: url("../assets/beranda.png") center / cover no-repeat;
+    background-attachment: fixed;
+    /* 🔥 tambahin ini biar sama kayak profile */
+
+    display: flex;
+}
+
+/* ================== HAMBURGER ================== */
+.hamburger {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 55px;
+    height: 55px;
+    border: none;
+    border-radius: 10px;
+    background: #2B6F8B;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 1000;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    transition: 0.3s ease;
+}
+
+/* ================== SIDEBAR ================== */
+.sidebar {
+    position: fixed;
+    top: 60px;
+    /* ✅ samakan dengan topbar */
+    left: 0;
+
+    width: 280px;
+    height: calc(100vh - 60px);
+    /* ✅ samakan juga */
+
+    background: rgba(52, 130, 160, 0.95);
+    padding: 25px 15px;
+
+    backdrop-filter: blur(3px);
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: 999;
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+.sidebar:not(.hidden) {
+    transform: translateX(0);
+}
+
+
+/* Sidebar Button */
+.side-btn {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 14px;
+    background: #6FBCE1;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.side-btn img {
+    width: 30px;
+    flex-shrink: 0;
+}
+
+/* ================== CONTENT ================== */
+.content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: margin-left 0.35s ease;
+}
+
+.sidebar:not(.hidden)~.content {
+    margin-left: 280px;
+    /* ikut geser */
+}
+
+.sidebar.hidden~.content {
+    margin-left: 0;
+}
+
+/* ================== CARD CONTAINER ================== */
+.card-container {
+    width: 100%;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Scrollbar */
+.card-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.card-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+/* ================== CARD ================== */
+.card {
+    position: relative;
+    width: 600px;
+    height: 190px;
+    padding: 15px;
+    border-radius: 22px;
+    border: 4px solid rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    color: white;
+}
+
+/* Card Variants */
+.card.blue {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+        rgba(0, 110, 255, 0.4);
+}
+
+.card.orange {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+        rgba(255, 110, 40, 0.4);
+}
+
+/* ================== CARD CONTENT ================== */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.title-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: block;
+}
+
+/* Footer */
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+/* Mascot */
+.maskot {
+    width: 90px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+}
+
+/* ================== BUTTONS ================== */
+.btn-green,
+.btn-blue,
+.btn-yellow,
+.btn-red {
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-green {
+    background: #3CC15F;
+}
+
+.btn-blue {
+    background: #1A73E8;
+}
+
+.btn-yellow {
+    background: #E8C048;
+}
+
+.btn-red {
+    background: #e84848;
+}
+
+.side-btn {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    border-radius: 14px;
+    background: #6FBCE1;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+
+    /* outline teks */
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.detail-surat {
+    display: grid;
+    grid-template-columns: 85px auto;
+    gap: 2px 5px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.detail-surat span {
+    display: block;
+}
+
+/* Styling Umum untuk Status Badge */
+.status-badge {
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 6px;
+    text-align: center;
+    color: white;
+    display: inline-block;
+    min-width: 80px;
+    /* Menjaga lebar tetap konsisten */
+    cursor: default;
+    /* Menghilangkan pointer tangan */
+    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    /* Memberi sedikit dimensi */
+}
+
+/* Variasi Warna Background */
+.bg-green {
+    background: #3CC15F;
+}
+
+.bg-yellow {
+    background: #E8C048;
+}
+
+.bg-red {
+    background: #e84848;
+}
+
+/* Pastikan tombol "Lihat" tetap menonjol */
+.btn-blue {
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    background: #1A73E8;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-blue:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* ================== BADGE SURAT BARU ================== */
+.badge-new {
+    position: absolute;
+    top: -12px;
+    /* Menggantung sedikit di atas garis border kartu */
+    left: 50%;
+    transform: translateX(-50%);
+    /* Agar tepat di tengah secara horizontal */
+
+    background: #E84848;
+    /* Warna merah sesuai gambar */
+    color: white;
+    padding: 4px 15px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    /* Border putih tipis agar pop-out */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    white-space: nowrap;
+}
+
+/* Penyesuaian pada Card agar badge tidak terpotong */
+.card {
+    position: relative;
+    /* ... kode lama ... */
+    margin-top: 15px;
+    /* Tambahkan margin top agar badge tidak menabrak kartu di atasnya */
+}
+
+/* Memperbaiki tampilan status badge (Non-Button) */
+.status-badge {
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    min-width: 80px;
+    display: inline-block;
+    cursor: default;
+}
+
+.bg-yellow {
+    background: #E8C048;
+}
+
+.bg-green {
+    background: #3CC15F;
+}
+
+/* ================= SEARCH ================= */
+.search-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    /* 🔥 Kanan */
+    padding: 20px 20px 0;
+    margin-bottom: 10px;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 320px;
+    /* 🔥 Lebih kecil */
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    outline: none;
+}
+
+.search-input:focus {
+    background: white;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ================= JABATAN BADGE ================= */
+.jabatan-badge {
+    margin: 6px 0 0;
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 0.5px;
+}
