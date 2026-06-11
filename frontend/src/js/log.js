@@ -7,8 +7,8 @@ let filteredActivities = [];
 
 // Mapping aktivitas untuk badge & label
 const AKTIVITAS_MAP = {
-    'login': { label: 'Login', class: 'badge-login' },
-    'logout': { label: 'Logout', class: 'badge-logout' },
+    'login': { label: 'Masuk', class: 'badge-login' },
+    'logout': { label: 'Keluar', class: 'badge-logout' },
     'create_surat': { label: 'Membuat Surat', class: 'badge-create' },
     'forward_surat': { label: 'Meneruskan Surat', class: 'badge-forward' },
     'read_surat': { label: 'Membaca Surat', class: 'badge-read' },
@@ -16,18 +16,19 @@ const AKTIVITAS_MAP = {
     'reject_surat': { label: 'Menolak Surat', class: 'badge-reject' },
     'create_user': { label: 'Membuat Akun', class: 'badge-user' },
     'delete_user': { label: 'Menghapus Akun', class: 'badge-user' },
-    'update_user': { label: 'Mengubah Akun', class: 'badge-user' }
+    'update_user': { label: 'Mengubah Akun', class: 'badge-user' },
+    'update_settings': { label: 'Mengubah Pengaturan', class: 'badge-user' },
+    'update_surat': { label: 'Mengubah Surat', class: 'badge-forward' }
 };
 
-// Format tanggal
+// Format tanggal (HH/BB/TTTT)
 function formatTanggal(isoString) {
     if (!isoString) return '-';
     const date = new Date(isoString);
-    return date.toLocaleDateString('id-ID', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric'
-    });
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    return `${dd}/${mm}/${yyyy}`;
 }
 
 function formatWaktu(isoString) {
@@ -113,22 +114,62 @@ function renderPagination(totalItems) {
     const pageNumbers = document.getElementById('pageNumbers');
     pageNumbers.innerHTML = '';
 
-    for (let i = 1; i <= totalPages; i++) {
+    function addPageButton(num) {
         const btn = document.createElement('button');
-        btn.textContent = i;
+        btn.textContent = num;
         btn.classList.add('page-btn');
-        if (i === currentPage) {
+
+        if (num === currentPage) {
             btn.classList.add('active');
         }
+
         btn.addEventListener('click', () => {
-            currentPage = i;
+            currentPage = num;
             renderTable(filteredActivities);
         });
+
         pageNumbers.appendChild(btn);
     }
 
+    if (totalPages <= 4) {
+        // Kalau halaman sedikit tampilkan semua
+        for (let i = 1; i <= totalPages; i++) {
+            addPageButton(i);
+        }
+    } else {
+        // Tampilkan 1 2 3
+        addPageButton(1);
+        addPageButton(2);
+        addPageButton(3);
+
+        // Tambahkan ...
+        const dotsBtn = document.createElement('button');
+        dotsBtn.textContent = '...';
+        dotsBtn.classList.add('page-btn');
+
+        dotsBtn.addEventListener('click', () => {
+            const page = prompt(`Masukkan nomor halaman (1-${totalPages})`);
+
+            if (
+                page &&
+                !isNaN(page) &&
+                page >= 1 &&
+                page <= totalPages
+            ) {
+                currentPage = parseInt(page);
+                renderTable(filteredActivities);
+            }
+        });
+
+        pageNumbers.appendChild(dotsBtn);
+
+        // Tambahkan halaman terakhir
+        addPageButton(totalPages);
+    }
+
     document.getElementById('prevPage').disabled = currentPage === 1;
-    document.getElementById('nextPage').disabled = currentPage === totalPages || totalPages === 0;
+    document.getElementById('nextPage').disabled =
+        currentPage === totalPages || totalPages === 0;
 }
 
 // Isi dropdown pengguna dari data aktivitas

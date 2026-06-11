@@ -22,6 +22,7 @@ func SetupRoutes(r *gin.Engine) {
 	DisposisiRoutes(r)
 	DashboardRoutes(r)
 	JabatanRoutes(r)
+	LogoRoutes(r)
 	DocsRoutes(r)
 }
 
@@ -41,6 +42,7 @@ func AdminRoutes(r *gin.Engine) {
 	admin.PUT("/users/:id/jabatan", controllers.UpdateUserJabatan)
 	admin.DELETE("/users/:id", controllers.DeleteUser)
 	admin.GET("/logs", controllers.ListLogs)
+	admin.POST("/logo/upload", controllers.UploadLogo)
 }
 
 func SuratMasukRoutes(r *gin.Engine) {
@@ -91,6 +93,10 @@ func DashboardRoutes(r *gin.Engine) {
 	dashboard := r.Group("/dashboard")
 	dashboard.Use(middlewares.AuthMiddleware())
 	dashboard.GET("", controllers.Dashboard)
+}
+
+func LogoRoutes(r *gin.Engine) {
+	r.GET("/logo", controllers.GetLogo)
 }
 
 func DocsRoutes(r *gin.Engine) {

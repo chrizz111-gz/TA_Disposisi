@@ -14,6 +14,15 @@ document.getElementById("btnKembali").addEventListener("click", () => {
     window.location.href = "home.html";
 });
 
+function formatTanggal(isoString) {
+    if (!isoString || isoString.startsWith("0001")) return "-";
+    const date = new Date(isoString);
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    return `${dd}/${mm}/${yyyy}`;
+}
+
 async function loadDetail() {
     const suratId = localStorage.getItem("selectedSuratId");
     if (!suratId) { window.location.href = "home.html"; return; }
@@ -29,7 +38,7 @@ async function loadDetail() {
         document.getElementById("noSurat").value = surat.no_surat || "";
         document.getElementById("perihalSurat").value = surat.perihal || "";
         if (surat.tanggal_surat) {
-            document.getElementById("tanggalSurat").value = surat.tanggal_surat.split("T")[0];
+            document.getElementById("tanggalSurat").value = formatTanggal(surat.tanggal_surat);
         }
 
         // Preview file — tanpa status surat

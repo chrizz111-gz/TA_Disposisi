@@ -38,7 +38,7 @@
     /* ✅ samakan dengan topbar */
     left: 0;
 
-    width: 280px;
+    width: 220px;
     height: calc(100vh - 60px);
     /* ✅ samakan juga */
 
@@ -65,17 +65,17 @@
 /* Sidebar Button */
 .side-btn {
     width: 100%;
-    padding: 12px 20px;
-    margin-bottom: 15px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     background: #6FBCE1;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 8px;
     white-space: nowrap;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
     cursor: pointer;
@@ -83,7 +83,7 @@
 }
 
 .side-btn img {
-    width: 30px;
+    width: 24px;
     flex-shrink: 0;
 }
 
@@ -98,7 +98,7 @@
 }
 
 .sidebar:not(.hidden)~.content {
-    margin-left: 280px;
+    margin-left: 220px;
     /* ikut geser */
 }
 
@@ -131,8 +131,9 @@
 /* ================== CARD ================== */
 .card {
     position: relative;
-    width: 600px;
-    height: 190px;
+    width: 90%;
+    max-width: 850px;
+    min-height: 190px;
     padding: 15px;
     border-radius: 22px;
     border: 4px solid rgba(255, 255, 255, 0.55);
@@ -140,6 +141,13 @@
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
     color: white;
+    transition: width 0.35s ease, max-width 0.35s ease;
+}
+
+/* Card mengecil saat sidebar terbuka */
+body.sidebar-open .card {
+    width: 85%;
+    max-width: 650px;
 }
 
 /* Card Variants */
@@ -153,6 +161,40 @@
     background:
         linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
         rgba(255, 110, 40, 0.4);
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 850px;
+    min-height: 190px;
+    border-radius: 22px;
+    border: 4px dashed rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    gap: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: width 0.35s ease, max-width 0.35s ease;
+}
+
+/* Empty State mengecil saat sidebar terbuka */
+body.sidebar-open .empty-state {
+    width: 85%;
+    max-width: 650px;
+}
+
+.empty-state .icon {
+    font-size: 44px;
+    opacity: 0.8;
 }
 
 /* ================== CARD CONTENT ================== */
@@ -229,12 +271,12 @@
 
 .side-btn {
     width: 100%;
-    padding: 12px 20px;
-    margin-bottom: 15px;
-    border-radius: 14px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
+    border-radius: 12px;
     background: #6FBCE1;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
 
     /* outline teks */
@@ -247,7 +289,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 8px;
     white-space: nowrap;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
     cursor: pointer;

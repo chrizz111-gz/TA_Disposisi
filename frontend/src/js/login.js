@@ -26,10 +26,10 @@ function closeAlert() {
 togglePw.addEventListener("click", () => {
     if (password.type === "password") {
         password.type = "text";
-        togglePw.style.backgroundImage = "url('../assets/eye-off.png')";
+        togglePw.style.backgroundImage = "url('../assets/eye.png')";
     } else {
         password.type = "password";
-        togglePw.style.backgroundImage = "url('../assets/eye.png')";
+        togglePw.style.backgroundImage = "url('../assets/eye-off.png')";
     }
 });
 
@@ -39,7 +39,7 @@ btnLogin.addEventListener("click", async () => {
     const passwordValue = password.value.trim();
 
     if (!emailValue || !passwordValue) {
-        showAlert("Tolong isi surel dan password.");
+        showAlert("Tolong isi surel dan kata sandi.");
         return;
     }
 
@@ -60,7 +60,7 @@ btnLogin.addEventListener("click", async () => {
         const data = await res.json();
 
         if (!res.ok) {
-            showAlert(data.error || "Login gagal");
+            showAlert(data.error || "Gagal masuk");
             return;
         }
 
@@ -85,7 +85,7 @@ btnLogin.addEventListener("click", async () => {
             url = "homeWaka.html";
         }
 
-        showAlert("Login berhasil!", url);
+        showAlert("Berhasil masuk!", url);
 
     } catch (error) {
         console.error(error);

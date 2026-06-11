@@ -23,12 +23,25 @@ document.getElementById("customAlert").addEventListener("click", function (e) {
     if (e.target === this) closeAlert();
 });
 
+// Set max tanggal = hari ini (tanggal mendatang di-disable)
+(function () {
+    const today = new Date().toISOString().split("T")[0];
+    const inputTanggal = document.getElementById("tanggalSurat");
+    if (inputTanggal) inputTanggal.max = today;
+})();
+
 let selectedFile = null;
 
 // Trigger klik input file tersembunyi
 document.getElementById("btnUpload").addEventListener("click", () => {
     document.getElementById("fileSurat").click();
 });
+const previewBox = document.querySelector(".preview-box");
+if (previewBox) {
+    previewBox.addEventListener("click", () => {
+        document.getElementById("fileSurat").click();
+    });
+}
 
 // Handle pemilihan file
 document.getElementById("fileSurat").addEventListener("change", (e) => {
@@ -42,7 +55,7 @@ document.getElementById("fileSurat").addEventListener("change", (e) => {
         selectedFile = null;
         e.target.value = ""; // reset input file
         if (preview) preview.innerHTML = "";
-        showAlert("Hanya boleh upload PDF dengan size maksimal 1MB.");
+        showAlert("Hanya boleh unggah PDF dengan ukuran maksimal 1MB.");
         return;
     }
 
@@ -70,7 +83,7 @@ document.getElementById("btnSubmit").addEventListener("click", async () => {
         return;
     }
     if (!selectedFile) {
-        showAlert("File PDF wajib diupload.");
+        showAlert("File PDF wajib diunggah.");
         return;
     }
 
@@ -95,7 +108,7 @@ document.getElementById("btnSubmit").addEventListener("click", async () => {
         if (!resSurat.ok) {
             showAlert(dataSurat.error || "Gagal mengirim surat.");
             btn.disabled = false;
-            btn.textContent = "Submit";
+            btn.textContent = "Kirim";
             return;
         }
 
@@ -104,12 +117,12 @@ document.getElementById("btnSubmit").addEventListener("click", async () => {
         localStorage.setItem("selectedSuratKeluarId", suratId);
 
         // Redirect ke halaman notifikasi
-        window.location.href = "notiforange.html";
+        showAlert("Surat keluar berhasil dikirim ke Kepala Sekolah!", "notiforange.html");
 
     } catch (err) {
         console.error(err);
         showAlert("Server tidak bisa diakses.");
         btn.disabled = false;
-        btn.textContent = "Submit";
+        btn.textContent = "Kirim";
     }
 });

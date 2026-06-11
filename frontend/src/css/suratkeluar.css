@@ -25,7 +25,7 @@ body {
     position: fixed;
     top: 60px;
     left: 0;
-    width: 280px;
+    width: 220px;
     height: calc(100vh - 60px);
     background: rgba(52, 130, 160, 0.95);
     padding: 25px 15px;
@@ -46,18 +46,18 @@ body {
 
 .side-btn {
     width: 100%;
-    padding: 12px 20px;
-    margin-bottom: 15px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     background: #6FBCE1;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 8px;
     white-space: nowrap;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
     cursor: pointer;
@@ -66,7 +66,7 @@ body {
 }
 
 .side-btn img {
-    width: 30px;
+    width: 24px;
     flex-shrink: 0;
 }
 
@@ -83,6 +83,7 @@ body {
     position: relative;
     width: 850px;
     padding: 25px;
+    padding-top: 70px;
     border-radius: 8px;
     border: 4px solid #9a5d32;
     box-shadow: 0 0 8px #7a4f2b;
@@ -90,6 +91,11 @@ body {
     background-size: cover;
     background-position: center;
     overflow: hidden;
+
+    display: grid;
+    grid-template-columns: 55% 40%;
+    justify-content: space-between;
+    align-items: start;
 }
 
 .form-box::before {
@@ -120,9 +126,9 @@ body {
 }
 
 form {
-    width: 55%;
-    float: left;
-    margin-top: 40px;
+    grid-column: 1;
+    width: 100%;
+    margin-top: 10px;
 }
 
 label {
@@ -132,7 +138,7 @@ label {
 }
 
 input {
-    width: 70%;
+    width: 90%;
     padding: 12px 15px;
     border: 2px solid white;
     border-radius: 10px;
@@ -150,10 +156,10 @@ input[disabled] {
 
 /* ================== PREVIEW BOX (DIPERBAIKI) ================== */
 .preview-box {
-    width: 38%;
+    grid-column: 2;
+    width: 100%;
     height: 240px;
-    float: right;
-    margin-top: 50px;
+    margin-top: 20px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     border: 2px dashed rgba(255, 255, 255, 0.7);
@@ -166,7 +172,14 @@ input[disabled] {
     font-size: 13px;
     text-align: center;
     padding: 15px;
-    transition: background 0.3s;
+    transition: background 0.3s, border-color 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+.preview-box:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
 }
 
 .preview-box:empty::before {
@@ -222,11 +235,11 @@ input[disabled] {
 }
 
 .upload-btn {
-    background: #4cd137;
+    background: #0a57c7;
 }
 
 .submit-btn {
-    background: #0a57c7;
+    background: #27ae60;
 }
 
 /* =============================================
@@ -299,4 +312,14 @@ input[disabled] {
 
 .alert-box button:hover {
     background: #1a5cbf;
+}
+
+/* Sidebar Shift for Main Content */
+.content {
+    transition: margin-left 0.35s ease;
+    width: 100%;
+}
+
+body.sidebar-open .content {
+    margin-left: 220px;
 }

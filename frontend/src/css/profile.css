@@ -1,3 +1,29 @@
+html,
+body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+
 .wrapper {
     margin-top: 60px;
     /* 🔥 samakan dengan tinggi topbar kamu */
@@ -36,7 +62,7 @@
     /* ✅ samakan dengan topbar */
     left: 0;
 
-    width: 280px;
+    width: 220px;
     height: calc(100vh - 60px);
     /* ✅ samakan juga */
 
@@ -63,17 +89,17 @@
 /* Sidebar Button */
 .side-btn {
     width: 100%;
-    padding: 12px 20px;
-    margin-bottom: 15px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     background: #6FBCE1;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 8px;
     white-space: nowrap;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
     cursor: pointer;
@@ -81,7 +107,7 @@
 }
 
 .side-btn img {
-    width: 30px;
+    width: 24px;
     flex-shrink: 0;
 }
 
@@ -213,6 +239,16 @@
     transition: background 0.2s ease;
 }
 
+#jabatanStatic {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2B6F8B;
+    background: rgba(255, 255, 255, 0.9) !important;
+    text-align: center;
+    border: 2px solid #2B6F8B;
+    letter-spacing: 0.5px;
+}
+
 .btn-logout:hover {
     background: #c03a3a;
 }
@@ -305,4 +341,101 @@
 
 .btn-primary:hover {
     background: #1e5570;
+}
+
+/* ================== LOGO SECTION ================== */
+.logo-section {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.logo-section-title {
+    text-align: center;
+    color: white;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.logo-preview-wrapper {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.logo-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.logo-upload-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.logo-file-label {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #2f6fa1;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+}
+
+.logo-file-label:hover {
+    background: #1e5570;
+}
+
+.logo-file-name {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-upload-logo {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #2B6F8B;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+.btn-upload-logo:hover:not(:disabled) {
+    background: #1e5570;
+}
+
+.btn-upload-logo:disabled {
+    background: #7a9aab;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.logo-status {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    min-height: 18px;
 }

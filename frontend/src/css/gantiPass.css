@@ -130,7 +130,13 @@ label {
     flex: 1;
     border: none;
     outline: none;
-    color: rgb(255, 0, 0);
+    background: transparent;
+    color: white;
+    font-size: 14px;
+}
+
+.input-box input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .input-box span {

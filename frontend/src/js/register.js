@@ -142,13 +142,25 @@ function validateForm() {
         return false;
     }
 
-    if (password.length < 6) {
-        errorMsg.textContent = 'Password minimal 6 karakter!';
+    if (password.length < 8) {
+        errorMsg.textContent = 'Kata sandi minimal 8 karakter!';
+        return false;
+    }
+    if (!/[A-Z]/.test(password)) {
+        errorMsg.textContent = 'Kata sandi harus mengandung minimal satu huruf besar!';
+        return false;
+    }
+    if (!/[a-z]/.test(password)) {
+        errorMsg.textContent = 'Kata sandi harus mengandung minimal satu huruf kecil!';
+        return false;
+    }
+    if (!/[0-9]/.test(password)) {
+        errorMsg.textContent = 'Kata sandi harus mengandung minimal satu angka!';
         return false;
     }
 
     if (password !== confirmpass) {
-        errorMsg.textContent = 'Password dan konfirmasi tidak cocok!';
+        errorMsg.textContent = 'Kata sandi dan konfirmasi tidak cocok!';
         return false;
     }
 

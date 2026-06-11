@@ -10,9 +10,20 @@ if (sidebar) {
     sidebar.appendChild(link);
 }
 
+if (sidebar && !sidebar.classList.contains("hidden")) {
+    document.body.classList.add("sidebar-open");
+}
+
 if (btn) {
     btn.addEventListener("click", () => {
         sidebar.classList.toggle("hidden");
+        
+        const isOpen = !sidebar.classList.contains("hidden");
+        if (isOpen) {
+            document.body.classList.add("sidebar-open");
+        } else {
+            document.body.classList.remove("sidebar-open");
+        }
 
         // Ubah model tombol
         if (sidebar.classList.contains("hidden")) {

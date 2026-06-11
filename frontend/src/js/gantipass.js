@@ -17,24 +17,24 @@
        VALIDASI RULE PASSWORD
     ========================= */
     function validasiPassword(value) {
-        const regex = /^[a-zA-Z0-9]+$/;
-
         // minimal 8 karakter
         if (value.length < 8) {
-            return "Password minimal 8 karakter";
+            return "Kata sandi minimal 8 karakter";
         }
 
-        // tidak boleh simbol
-        if (!regex.test(value)) {
-            return "Password tidak boleh mengandung simbol";
+        // minimal satu huruf besar
+        if (!/[A-Z]/.test(value)) {
+            return "Kata sandi harus mengandung minimal satu huruf besar";
         }
 
-        // hitung jumlah angka
-        const jumlahAngka = (value.match(/[0-9]/g) || []).length;
+        // minimal satu huruf kecil
+        if (!/[a-z]/.test(value)) {
+            return "Kata sandi harus mengandung minimal satu huruf kecil";
+        }
 
-        // minimal 2 angka
-        if (jumlahAngka < 2) {
-            return "Password harus mengandung minimal 2 angka";
+        // minimal satu angka
+        if (!/[0-9]/.test(value)) {
+            return "Kata sandi harus mengandung minimal satu angka";
         }
 
         return "valid";
@@ -109,11 +109,14 @@
     toggles.forEach(toggle => {
         toggle.addEventListener('click', function () {
             const input = this.parentElement.querySelector('input');
+            const img = this.querySelector('img');
             if (input) {
                 if (input.type === "password") {
                     input.type = "text";
+                    if (img) img.src = "../assets/eye.png";
                 } else {
                     input.type = "password";
+                    if (img) img.src = "../assets/eye-off.png";
                 }
             }
         });

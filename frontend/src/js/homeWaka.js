@@ -15,7 +15,10 @@
         if (!isoString || isoString.startsWith("0001")) return "-";
         const date = new Date(isoString);
         if (isNaN(date.getTime()) || date.getFullYear() < 2000) return "-";
-        return date.toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+        const dd = String(date.getDate()).padStart(2, '0');
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const yyyy = date.getFullYear();
+        return `${dd}/${mm}/${yyyy}`;
     }
 
     function getStatusBadge(status) {
@@ -109,7 +112,7 @@
             }
 
             if (filteredCards.length === 0) {
-                cardContainer.innerHTML = '<p style="padding:1rem">Tidak ada surat.</p>';
+                cardContainer.innerHTML = '<div class="empty-state"><span class="icon">✉</span> Tidak ada surat.</div>';
                 return;
             }
 

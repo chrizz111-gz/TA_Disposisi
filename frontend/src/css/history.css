@@ -152,7 +152,7 @@ tbody tr:hover {
     /* ✅ samakan dengan topbar */
     left: 0;
 
-    width: 280px;
+    width: 220px;
     height: calc(100vh - 60px);
     /* ✅ samakan juga */
 
@@ -179,52 +179,23 @@ tbody tr:hover {
 /* Sidebar Button */
 .side-btn {
     width: 100%;
-    padding: 12px 20px;
-    margin-bottom: 15px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     background: #6FBCE1;
     color: white;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    white-space: nowrap;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.side-btn img {
-    width: 30px;
-    flex-shrink: 0;
-}
-
-.side-btn {
+    font-size: 15px;
     font-weight: 600;
-
     text-shadow:
         -1px -1px 0 #000,
         1px -1px 0 #000,
         -1px 1px 0 #000,
         1px 1px 0 #000;
-}
-
-/* Sidebar Button */
-.side-btn {
-    width: 100%;
-    padding: 12px 20px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 14px;
-    background: #6FBCE1;
-    color: white;
-    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 8px;
     white-space: nowrap;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
     cursor: pointer;
@@ -232,7 +203,7 @@ tbody tr:hover {
 }
 
 .side-btn img {
-    width: 30px;
+    width: 24px;
     flex-shrink: 0;
 }
 
@@ -256,4 +227,12 @@ td .jabatan-tags {
     padding: 3px 10px;
     border-radius: 12px;
     white-space: nowrap;
+}
+
+/* Sidebar Shift for History Container */
+.history-container {
+    transition: margin-left 0.35s ease;
+}
+body.sidebar-open .history-container {
+    margin-left: 220px;
 }

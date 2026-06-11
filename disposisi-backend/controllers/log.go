@@ -57,6 +57,7 @@ func WriteLogDistribusi(idSM *uint, idSK *uint, statusAsal string, statusTujuan 
 // mapAksiToAktivitas — konversi aksi internal ke label aktivitas frontend
 func mapAksiToAktivitas(aksi string, tabel string) string {
 	aksiLower := strings.ToLower(aksi)
+	tabelLower := strings.ToLower(tabel)
 
 	if strings.Contains(aksiLower, "login") {
 		return "login"
@@ -67,21 +68,30 @@ func mapAksiToAktivitas(aksi string, tabel string) string {
 
 	// Surat-related
 	if strings.Contains(aksiLower, "create") || strings.Contains(aksiLower, "insert") || strings.Contains(aksiLower, "upload") {
-		if strings.Contains(tabel, "surat") {
+		if strings.Contains(tabelLower, "surat") {
 			return "create_surat"
 		}
-		if strings.Contains(tabel, "user") {
+		if strings.Contains(tabelLower, "user") {
 			return "create_user"
+		}
+		if strings.Contains(tabelLower, "disposisi") {
+			return "forward_surat"
 		}
 	}
 	if strings.Contains(aksiLower, "delete") || strings.Contains(aksiLower, "hapus") {
-		if strings.Contains(tabel, "user") {
+		if strings.Contains(tabelLower, "user") {
 			return "delete_user"
 		}
 	}
 	if strings.Contains(aksiLower, "update") || strings.Contains(aksiLower, "ubah") {
-		if strings.Contains(tabel, "user") || strings.Contains(tabel, "jabatan") {
+		if strings.Contains(tabelLower, "user") || strings.Contains(tabelLower, "jabatan") {
 			return "update_user"
+		}
+		if strings.Contains(tabelLower, "settings") || strings.Contains(tabelLower, "logo") {
+			return "update_settings"
+		}
+		if strings.Contains(tabelLower, "surat") {
+			return "update_surat"
 		}
 	}
 	if strings.Contains(aksiLower, "approve") || strings.Contains(aksiLower, "setuju") {
@@ -97,9 +107,9 @@ func mapAksiToAktivitas(aksi string, tabel string) string {
 		return "read_surat"
 	}
 
-	// Fallback: pakai tabel untuk tebak
-	if strings.Contains(tabel, "surat") {
-		return "create_surat"
+	// Fallback
+	if strings.Contains(tabelLower, "surat") {
+		return "update_surat"
 	}
 	return aksiLower
 }
@@ -124,6 +134,84 @@ func statusToLabel(status string) string {
 	default:
 		return status
 	}
+}
+
+// formatDetailIndonesian — format pesan detail aktivitas ke bahasa Indonesia yang baku dan rapi
+func formatDetailIndonesian(aksi, tabel, kolom, oldVal, newVal string) string {
+	aksiLower := strings.ToLower(aksi)
+	tabelLower := strings.ToLower(tabel)
+	kolomLower := strings.ToLower(kolom)
+
+	if strings.Contains(aksiLower, "login") {
+		return fmt.Sprintf("Masuk ke aplikasi dengan surel %s", newVal)
+	}
+	if strings.Contains(aksiLower, "logout") {
+		return "Keluar dari aplikasi"
+	}
+
+	if strings.Contains(aksiLower, "create") || strings.Contains(aksiLower, "insert") {
+		if strings.Contains(tabelLower, "surat_masuk") {
+			return fmt.Sprintf("Membuat surat masuk baru dengan nomor %s", newVal)
+		}
+		if strings.Contains(tabelLower, "surat_keluar") {
+			return fmt.Sprintf("Membuat surat keluar baru dengan nomor %s", newVal)
+		}
+		if strings.Contains(tabelLower, "user") {
+			return fmt.Sprintf("Membuat akun baru untuk pengguna '%s'", newVal)
+		}
+		if strings.Contains(tabelLower, "disposisi") {
+			return fmt.Sprintf("Membuat disposisi baru (%s)", newVal)
+		}
+	}
+
+	if strings.Contains(aksiLower, "delete") || strings.Contains(aksiLower, "hapus") {
+		if strings.Contains(tabelLower, "user") {
+			return fmt.Sprintf("Menghapus akun pengguna '%s'", oldVal)
+		}
+		return fmt.Sprintf("Menghapus data dari tabel %s", tabel)
+	}
+
+	if strings.Contains(aksiLower, "update") || strings.Contains(aksiLower, "ubah") {
+		if strings.Contains(tabelLower, "settings") && strings.Contains(kolomLower, "logo") {
+			return fmt.Sprintf("Mengubah logo aplikasi menjadi %s", newVal)
+		}
+		if strings.Contains(tabelLower, "surat_masuk") && strings.Contains(kolomLower, "status_verifikasi") {
+			return fmt.Sprintf("Mengubah status verifikasi surat masuk dari '%s' ke '%s'", oldVal, newVal)
+		}
+		if strings.Contains(tabelLower, "surat_keluar") && strings.Contains(kolomLower, "status_alur") {
+			return fmt.Sprintf("Mengubah alur status surat keluar dari '%s' ke '%s'", oldVal, newVal)
+		}
+		if strings.Contains(tabelLower, "user_jabatan") {
+			return fmt.Sprintf("Memperbarui jabatan pengguna menjadi %s", newVal)
+		}
+		return fmt.Sprintf("Mengubah kolom %s dari '%s' menjadi '%s'", kolom, oldVal, newVal)
+	}
+
+	if strings.Contains(aksiLower, "teruskan") || strings.Contains(aksiLower, "forward") {
+		if strings.Contains(aksiLower, "waka") {
+			return fmt.Sprintf("Meneruskan surat ke Waka (%s)", newVal)
+		}
+		if strings.Contains(aksiLower, "user") {
+			return fmt.Sprintf("Meneruskan surat ke pengguna (%s)", newVal)
+		}
+	}
+
+	if strings.Contains(aksiLower, "setuju") || strings.Contains(aksiLower, "approve") {
+		return fmt.Sprintf("Menyetujui disposisi surat (%s)", newVal)
+	}
+
+	// Fallback
+	res := aksi
+	if tabel != "" {
+		res += fmt.Sprintf(" pada %s", tabel)
+	}
+	if kolom != "" {
+		res += fmt.Sprintf(" (kolom: %s)", kolom)
+	}
+	if oldVal != "" || newVal != "" {
+		res += fmt.Sprintf(" dari '%s' ke '%s'", oldVal, newVal)
+	}
+	return res
 }
 
 // getUserInfo — ambil nama dan jabatan user
@@ -169,17 +257,7 @@ func ListLogs(c *gin.Context) {
 		}
 		userName, userJabatan := getUserInfo(uid)
 		aktivitas := mapAksiToAktivitas(l.Aksi, l.TabelTerkait)
-
-		detail := l.Aksi
-		if l.TabelTerkait != "" {
-			detail = fmt.Sprintf("%s pada %s", l.Aksi, l.TabelTerkait)
-		}
-		if l.KolomTerkait != "" {
-			detail += fmt.Sprintf(" (kolom: %s)", l.KolomTerkait)
-		}
-		if l.ValuesOld != "" || l.ValuesNew != "" {
-			detail += fmt.Sprintf(" — dari '%s' ke '%s'", l.ValuesOld, l.ValuesNew)
-		}
+		detail := formatDetailIndonesian(l.Aksi, l.TabelTerkait, l.KolomTerkait, l.ValuesOld, l.ValuesNew)
 
 		activities = append(activities, ActivityItem{
 			CreatedAt:   l.UpdatedAt,

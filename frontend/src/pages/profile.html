@@ -56,7 +56,22 @@
                         <input type="text" id="jabatanStatic" readonly>
                     </div>
 
-                    <a href="gantipass.html" class="btn-link">Ganti Kata Sandi</a>
+                    <!-- Section Ganti Logo (hanya admin) -->
+                    <div id="logoSection" class="logo-section" style="display:none;">
+                        <h4 class="logo-section-title">Ganti Logo Aplikasi</h4>
+                        <div class="logo-preview-wrapper">
+                            <img id="logoPreview" src="../assets/logo.png" alt="Logo Preview" class="logo-preview">
+                        </div>
+                        <div class="logo-upload-area">
+                            <label for="logoFile" class="logo-file-label">
+                                📁 Pilih File Logo
+                            </label>
+                            <input type="file" id="logoFile" accept=".png,.jpg,.jpeg" style="display:none;">
+                            <span id="logoFileName" class="logo-file-name">Belum ada file dipilih</span>
+                        </div>
+                        <button class="btn-upload-logo" id="btnUploadLogo" disabled>Unggah Logo</button>
+                        <p id="logoStatus" class="logo-status"></p>
+                    </div>
 
                     <button class="btn-logout" id="btnLogout">Keluar</button>
                 </div>
@@ -74,6 +89,7 @@
     </div>
 
     <script src="../js/api.js"></script>
+    <script src="../js/logo.js"></script>
     <script src="../js/sidebar.js"></script>
     <script>
         (function () {
@@ -89,6 +105,101 @@
                 .map(j => j.toUpperCase())
                 .join(" / ");
             document.getElementById("jabatanStatic").value = jabatanText || "-";
+
+            // Tampilkan section logo jika admin
+            const isAdmin = jabatans.some(j => j.toLowerCase() === "admin");
+            if (isAdmin) {
+                document.getElementById("logoSection").style.display = "block";
+
+                // Load preview logo saat ini
+                const logoPreview = document.getElementById("logoPreview");
+                fetch(BASE_URL + "/logo")
+                    .then(res => {
+                        if (res.ok) {
+                            logoPreview.src = BASE_URL + "/logo?t=" + Date.now();
+                        }
+                    })
+                    .catch(() => { });
+
+                // File input handler
+                const logoFile = document.getElementById("logoFile");
+                const logoFileName = document.getElementById("logoFileName");
+                const btnUpload = document.getElementById("btnUploadLogo");
+
+                logoFile.addEventListener("change", function () {
+                    if (logoFile.files.length > 0) {
+                        const file = logoFile.files[0];
+                        logoFileName.textContent = file.name;
+                        btnUpload.disabled = false;
+
+                        // Preview gambar yang dipilih
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            logoPreview.src = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        logoFileName.textContent = "Belum ada file dipilih";
+                        btnUpload.disabled = true;
+                    }
+                });
+
+                // Upload handler
+                btnUpload.addEventListener("click", async function () {
+                    if (!logoFile.files.length) return;
+
+                    const file = logoFile.files[0];
+
+                    // Validasi ukuran client-side
+                    if (file.size > 2 * 1024 * 1024) {
+                        document.getElementById("logoStatus").textContent = "❌ Ukuran file maksimal 2MB";
+                        document.getElementById("logoStatus").style.color = "#e05555";
+                        return;
+                    }
+
+                    btnUpload.disabled = true;
+                    btnUpload.textContent = "Mengunggah...";
+                    document.getElementById("logoStatus").textContent = "";
+
+                    const formData = new FormData();
+                    formData.append("logo", file);
+
+                    try {
+                        const token = getToken();
+                        const res = await fetch(BASE_URL + "/admin/logo/upload", {
+                            method: "POST",
+                            headers: { "Authorization": "Bearer " + token },
+                            body: formData
+                        });
+
+                        const data = await res.json();
+
+                        if (res.ok) {
+                            document.getElementById("logoStatus").textContent = "✅ " + data.message;
+                            document.getElementById("logoStatus").style.color = "#3CC15F";
+
+                            // Update logo di header halaman ini
+                            const headerLogo = document.querySelector("header.topbar img.logo");
+                            if (headerLogo) {
+                                headerLogo.src = BASE_URL + "/logo?t=" + Date.now();
+                            }
+
+                            // Reset file input
+                            logoFile.value = "";
+                            logoFileName.textContent = "Belum ada file dipilih";
+                        } else {
+                            document.getElementById("logoStatus").textContent = "❌ " + (data.error || "Gagal upload");
+                            document.getElementById("logoStatus").style.color = "#e05555";
+                        }
+                    } catch (err) {
+                        document.getElementById("logoStatus").textContent = "❌ Terjadi kesalahan jaringan";
+                        document.getElementById("logoStatus").style.color = "#e05555";
+                    }
+
+                    btnUpload.textContent = "Unggah Logo";
+                    // Button stays disabled until new file is selected
+                });
+            }
 
             let redirectUrl = "";
             function showAlertProfile(msg, url = "") {
@@ -107,4 +218,4 @@
 
 </body>
 
-</html>
+</html>

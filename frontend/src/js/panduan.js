@@ -148,7 +148,7 @@
                 title: 'Riwayat Catatan Aktivitas',
                 steps: [
                     'Buka menu "Riwayat" di sidebar lalu klik "Log Aktivitas" (atau langsung klik ikon Log).',
-                    'Catatan aktivitas merekam aksi penting: login, tambah surat, teruskan surat, update jabatan, dan hapus user.',
+                    'Catatan aktivitas merekam aksi penting: masuk, tambah surat, teruskan surat, update jabatan, dan hapus user.',
                     'Informasi mencakup: Waktu, Nama Pengguna, Jabatan, Jenis Aktivitas, dan Detail Aksi.',
                     'Gunakan filter pencarian, filter tanggal, atau filter pengguna untuk menyaring catatan aktivitas.'
                 ]

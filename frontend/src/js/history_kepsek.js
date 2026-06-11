@@ -16,9 +16,11 @@
 
     function formatTanggal(isoString) {
         if (!isoString || isoString.startsWith("0001")) return "-";
-        return new Date(isoString).toLocaleDateString("id-ID", {
-            day: "numeric", month: "short", year: "numeric"
-        });
+        const date = new Date(isoString);
+        const dd = String(date.getDate()).padStart(2, '0');
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const yyyy = date.getFullYear();
+        return `${dd}/${mm}/${yyyy}`;
     }
 
     function formatWaktu(isoString) {
