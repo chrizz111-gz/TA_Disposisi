@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kata Sandi Berhasil Diubah</title>
+  <title>Password Berhasil Diubah</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/berhasilpass.css">
 </head>
@@ -47,21 +47,68 @@
       </p>
 
       <!-- BUTTON -->
-      <a href="login.html" class="login-link">
-        <button class="login-btn">Masuk sekarang →</button>
-      </a>
+      <button class="login-btn" onclick="window.location.href='login.html'">
+        Masuk sekarang →
+      </button>
 
       <!-- SUPPORT -->
       <p class="support-text">
         Butuh bantuan?
-        <span>Hubungi support</span>
+        <span id="btnSupport">Hubungi support</span>
       </p>
 
+      <!-- POPUP SUPPORT -->
+      <div class="popup-support" id="popupSupport">
+        <div class="popup-box">
+
+          <h3>Hubungi Support</h3>
+
+          <p class="popup-desc">
+            Jika mengalami kendala, silakan hubungi admin melalui salah satu kontak berikut.
+          </p>
+
+          <div class="contact-info">
+            <p><strong>WhatsApp:</strong> 081234567890</p>
+            <p><strong>Email:</strong> support@gmail.com</p>
+          </div>
+
+          <div class="popup-actions">
+            <a href="https://wa.me/6281234567890" target="_blank" class="btn-wa">
+              WhatsApp
+            </a>
+
+            <a href="mailto:support@gmail.com" class="btn-email">
+              Email
+            </a>
+          </div>
+
+          <button class="btn-close" onclick="tutupPopup()">
+            Tutup
+          </button>
+
+        </div>
+      </div>
     </div>
 
   </section>
+  <script>
+    const btnSupport = document.getElementById("btnSupport");
+    const popupSupport = document.getElementById("popupSupport");
 
-    <script src="../js/logo.js"></script>
+    btnSupport.addEventListener("click", () => {
+      popupSupport.style.display = "flex";
+    });
+
+    function tutupPopup() {
+      popupSupport.style.display = "none";
+    }
+
+    window.addEventListener("click", function (e) {
+      if (e.target === popupSupport) {
+        popupSupport.style.display = "none";
+      }
+    });
+  </script>
 </body>
 
 </html>
