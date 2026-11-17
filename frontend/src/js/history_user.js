@@ -9,6 +9,9 @@
 
     const tbody = document.getElementById("tableBody");
     const filterJabatanEl = document.getElementById("filterJabatan");
+    const today = new Date().toISOString().split("T")[0];
+    const filterTanggalInput = document.getElementById("filterTanggal");
+    if (filterTanggalInput) filterTanggalInput.max = today;
 
     let allData = [];
     let activeTab = "semua";
@@ -80,7 +83,7 @@
         }
 
         if (filtered.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:1rem">Tidak ada data.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="11" style="text-align:center;padding:1rem">Tidak ada data.</td></tr>`;
             return;
         }
 
@@ -94,6 +97,7 @@
                 <td>${row.asal || "-"}</td>
                 <td>${row.perihal || "-"}</td>
                 <td><span class="jabatan-badge-table">${row.jabatanLabels}</span></td>
+                <td>${row.penerimaLabels || "-"}</td>
                 <td><span class="status ok">${row.statusLabel}</span></td>
                 <td><button class="btn-view" data-id="${row.id}">Lihat</button></td>
             </tr>
@@ -148,11 +152,11 @@
     });
 
     async function loadHistory() {
-        tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:1rem">Memuat...</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center;padding:1rem">Memuat...</td></tr>`;
         try {
             const res = await apiListDisposisi();
             if (!res || !res.ok) {
-                tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;color:red">Gagal memuat data.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="11" style="text-align:center;color:red">Gagal memuat data.</td></tr>`;
                 return;
             }
 
@@ -224,6 +228,18 @@
                         statusLabel = "Ditolak";
                     }
 
+                    // Ambil nama penerima (user yang diteruskan oleh waka)
+                    let penerimaLabels = "-";
+                    if (isUserWaka) {
+                        const penerimaList = (d.distribusi || [])
+                            .filter(dist => dist.id_waka === user.id && dist.id_user && dist.id_user !== user.id)
+                            .map(dist => dist.user?.name || dist.user?.nama || "User #" + dist.id_user);
+                        const uniquePenerima = [...new Set(penerimaList)];
+                        if (uniquePenerima.length > 0) {
+                            penerimaLabels = uniquePenerima.join(", ");
+                        }
+                    }
+
                     return {
                         jenis: "masuk",
                         id: d.id_surat_masuk || surat.id,
@@ -234,7 +250,8 @@
                         status: status,
                         statusLabel: statusLabel,
                         jabatans: jabatans,
-                        jabatanLabels: jabatanLabels
+                        jabatanLabels: jabatanLabels,
+                        penerimaLabels: penerimaLabels
                     };
                 });
 
@@ -242,7 +259,7 @@
 
         } catch (err) {
             console.error(err);
-            tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;color:red">Server tidak bisa diakses.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="11" style="text-align:center;color:red">Server tidak bisa diakses.</td></tr>`;
         }
     }
 

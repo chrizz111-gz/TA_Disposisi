@@ -53,6 +53,11 @@
       document.getElementById("notifDesc").textContent =
         "Surat keluar telah disetujui oleh Kepala Sekolah dan tersimpan di riwayat.";
       btn.onclick = () => window.location.href = "homeKepsek.html";
+    } else if (tipe === "kepsek-tolak") {
+      document.getElementById("notifJudul").textContent = "Surat telah ditolak";
+      document.getElementById("notifDesc").textContent =
+        "Surat keluar telah ditolak oleh Kepala Sekolah. Catatan penolakan tersimpan di riwayat.";
+      btn.onclick = () => window.location.href = "homeKepsek.html";
     } else {
       // Default: TU upload surat keluar → kembali ke dashboard TU
       btn.onclick = () => {

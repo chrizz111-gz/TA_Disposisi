@@ -4,6 +4,10 @@
     if (!user) { window.location.href = "login.html"; return; }
 
     const tbody = document.getElementById("tableBody");
+    const today = new Date().toISOString().split("T")[0];
+    const filterTanggalInput = document.getElementById("filterTanggal");
+    if (filterTanggalInput) filterTanggalInput.max = today;
+
     let allData = [];
     let activeTab = "semua";
     let activeStatus = "semua";

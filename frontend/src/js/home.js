@@ -72,9 +72,13 @@
             localStorage.setItem("fromHistory", "false");
 
             if (isNew) {
-                // Tandai selesai dulu kalau ada fungsinya
-                if (typeof apiSelesaikanSuratMasuk === "function") {
-                    await apiSelesaikanSuratMasuk(suratId);
+                if (surat.status_verifikasi === "ditolak") {
+                    const readRejectedSM = JSON.parse(localStorage.getItem("readRejectedSuratMasuk") || "[]");
+                    const numId = parseInt(suratId);
+                    if (!readRejectedSM.includes(numId)) {
+                        readRejectedSM.push(numId);
+                        localStorage.setItem("readRejectedSuratMasuk", JSON.stringify(readRejectedSM));
+                    }
                 }
                 // Animasi hilang
                 card.style.transition = "opacity 0.3s";
@@ -161,8 +165,14 @@
             const dataKeluar = resKeluar?.ok ? (await resKeluar.json()).data || [] : [];
 
             // Filter: Hanya tampilkan surat yang belum selesai diproses
-            // 1. Surat Masuk: Hilang jika sudah diteruskan atau selesai
-            const filteredMasuk = dataMasuk.filter(s => s.status_alur !== "diteruskan" && s.status_alur !== "selesai");
+            // 1. Surat Masuk: Hilang jika sudah diteruskan atau selesai, atau ditolak dan sudah dilihat
+            const readRejectedSM = JSON.parse(localStorage.getItem("readRejectedSuratMasuk") || "[]");
+            const filteredMasuk = dataMasuk.filter(s => {
+                const sId = s.id_surat_masuk || s.id;
+                const isRejectedAndRead = s.status_verifikasi === "ditolak" &&
+                    (readRejectedSM.includes(sId) || readRejectedSM.includes(parseInt(sId)));
+                return s.status_alur !== "diteruskan" && s.status_alur !== "selesai" && !isRejectedAndRead;
+            });
 
             // 2. Surat Keluar: Hilang jika sudah selesai
             const filteredKeluar = dataKeluar.filter(s => s.status_alur !== "selesai");

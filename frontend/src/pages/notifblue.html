@@ -45,11 +45,18 @@
   <script>
     const params = new URLSearchParams(window.location.search);
     const tipe = params.get("tipe");
+    const btn = document.getElementById("btnKembali");
 
     if (tipe === "teruskan") {
       document.querySelector("h1").textContent = "Surat berhasil diteruskan";
       document.getElementById("notifDesc").textContent =
         "Surat telah diteruskan ke penerima. Surat akan tersimpan di riwayat.";
+      btn.onclick = () => window.location.href = "home.html";
+    } else if (tipe === "kepsek-tolak") {
+      document.querySelector("h1").textContent = "Surat telah ditolak";
+      document.getElementById("notifDesc").textContent =
+        "Surat masuk telah ditolak oleh Kepala Sekolah. Catatan penolakan tersimpan di riwayat.";
+      btn.onclick = () => window.location.href = "homeKepsek.html";
     }
     // default: teks asli untuk TU kirim ke Kepsek
   </script>

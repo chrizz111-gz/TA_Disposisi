@@ -42,15 +42,29 @@
 
                 if (surat.file_pdf) {
                     const lampiranBox = document.getElementById("lampiranBox");
-                    const namaFile = surat.file_pdf.split(/[\\\/]/).pop();
-                    lampiranBox.innerHTML = `
-                        <p style="font-size:16px;font-weight:bold">📄 ${namaFile}</p>
-                        <p style="font-size:13px;margin-top:8px;opacity:0.8">Klik untuk membuka PDF</p>
-                    `;
-                    lampiranBox.style.cursor = "pointer";
-                    lampiranBox.onclick = () => {
-                        window.open("http://localhost:7000/" + surat.file_pdf.replace(/\\/g, "/"), "_blank");
-                    };
+                    if (lampiranBox) {
+                        const pdfUrl = "http://localhost:7000/" + surat.file_pdf.replace(/\\/g, "/");
+                        const fileName = surat.file_pdf.split(/[\\\/]/).pop() || "dokumen.pdf";
+                        lampiranBox.innerHTML = `
+                            <div class="pdf-thumbnail" onclick="window.open('${pdfUrl}', '_blank')">
+                                <div class="pdf-icon">
+                                    <svg width="56" height="70" viewBox="0 0 56 70" fill="none">
+                                        <rect width="56" height="70" rx="6" fill="rgba(255,255,255,0.15)"/>
+                                        <path d="M10 8h24l12 12v42H10V8z" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                                        <path d="M34 8v12h12" fill="none" stroke="rgba(180,210,240,0.8)" stroke-width="1.5"/>
+                                        <rect x="16" y="28" width="24" height="2.5" rx="1.2" fill="#e74c3c" opacity="0.85"/>
+                                        <rect x="16" y="34" width="20" height="2" rx="1" fill="rgba(100,140,180,0.7)"/>
+                                        <rect x="16" y="39" width="22" height="2" rx="1" fill="rgba(100,140,180,0.7)"/>
+                                        <rect x="16" y="44" width="18" height="2" rx="1" fill="rgba(100,140,180,0.7)"/>
+                                    </svg>
+                                </div>
+                                <div class="pdf-label">${fileName}</div>
+                                <div class="pdf-action">
+                                    <span>🔍 Klik untuk membuka PDF</span>
+                                </div>
+                            </div>
+                        `;
+                    }
                 }
             }
         } catch (err) {
@@ -124,7 +138,7 @@
             if (isApproved) {
                 window.location.href = "notifblue.html";
             } else {
-                window.location.href = "homeKepsek.html";
+                window.location.href = "notifblue.html?tipe=kepsek-tolak";
             }
 
         } catch (err) {

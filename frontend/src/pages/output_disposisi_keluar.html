@@ -27,14 +27,14 @@
                     <h3>Surat Keluar</h3>
                     <div class="surat-item">
                         <div class="item-row">
-                            <span class="label">No Surat</span>
+                            <span class="label">Nomor Surat</span>
                             <span class="separator">:</span>
                             <span class="value" id="valNoSurat">-</span>
                         </div>
                         <div class="item-row">
-                            <span class="label">Kode</span>
+                            <span class="label">Tanggal</span>
                             <span class="separator">:</span>
-                            <span class="value" id="valKode">-</span>
+                            <span class="value" id="valTanggal">-</span>
                         </div>
                         <div class="item-row">
                             <span class="label">Dari</span>
@@ -42,24 +42,29 @@
                             <span class="value">SMK NEGERI 2 SINGOSARI</span>
                         </div>
                         <div class="item-row">
-                            <span class="label">Perihal</span>
-                            <span class="separator">:</span>
-                            <span class="value" id="valPerihal">-</span>
-                        </div>
-                        <div class="item-row">
                             <span class="label">Tujuan</span>
                             <span class="separator">:</span>
                             <span class="value" id="valTujuan">-</span>
                         </div>
                         <div class="item-row">
-                            <span class="label">Tanggal</span>
+                            <span class="label">Perihal</span>
                             <span class="separator">:</span>
-                            <span class="value" id="valTanggal">-</span>
+                            <span class="value" id="valPerihal">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Kode</span>
+                            <span class="separator">:</span>
+                            <span class="value" id="valKode">-</span>
+                        </div>
+                        <div class="item-row">
+                            <span class="label">Lampiran</span>
+                            <span class="separator">:</span>
+                            <span class="value">1 Berkas PDF</span>
                         </div>
                     </div>
 
                     <div class="lampiran-box" id="lampiranBox">
-                        <p>Lihat Lampiran (PDF)</p>
+                        <p>Memuat lampiran...</p>
                     </div>
 
                     <div class="left-button-area">
@@ -77,30 +82,33 @@
                         <label>Status</label>
                         <div id="valStatus" style="
                             display: inline-block;
-                            padding: 6px 16px;
-                            border-radius: 20px;
+                            padding: 10px 16px;
+                            border-radius: 8px;
                             font-weight: bold;
                             background: #E8C048;
                             color: white;
-                            font-size: 14px;
+                            font-size: 15px;
                         ">Menunggu</div>
                     </div>
 
                     <div class="form-group">
-                        <label>Diproses Oleh</label>
-                        <input type="text" id="valKepsek" readonly>
+                        <label>Diverifikasi Oleh</label>
+                        <input type="text" id="valKepsek" readonly
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3)">
                     </div>
 
                     <div class="form-group">
-                        <label>Tanggal Diproses</label>
-                        <input type="text" id="valApprovalAt" readonly>
+                        <label>Tanggal Keputusan</label>
+                        <input type="text" id="valApprovalAt" readonly
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3)">
                     </div>
 
                     <div class="form-group">
                         <label>Catatan Kepsek</label>
-                        <textarea id="valCatatan" readonly style="min-height:120px"></textarea>
+                        <textarea id="valCatatanKepsek" readonly rows="2"
+                            style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);resize:none"
+                            placeholder="-"></textarea>
                     </div>
-
                 </div>
             </div>
 

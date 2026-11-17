@@ -117,7 +117,7 @@ document.getElementById("btnSubmit").addEventListener("click", async () => {
         localStorage.setItem("selectedSuratKeluarId", suratId);
 
         // Redirect ke halaman notifikasi
-        showAlert("Surat keluar berhasil dikirim ke Kepala Sekolah!", "notiforange.html");
+        window.location.href = "notiforange.html";
 
     } catch (err) {
         console.error(err);

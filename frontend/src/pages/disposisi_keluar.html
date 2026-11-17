@@ -25,36 +25,50 @@
             <div class="left-panel">
                 <div class="card surat-preview">
                     <h3>Surat Keluar</h3>
-                    <div class="surat-item">
-                        <div class="item-row">
-                            <span class="label">No Surat</span>
-                            <span class="separator">:</span>
-                            <span class="value" id="valNoSurat">-</span>
+                    <div class="surat-grid">
+                        <div class="surat-col">
+                            <div class="item-row">
+                                <span class="label">Nomor Surat</span>
+                                <span class="separator">:</span>
+                                <span class="value" id="valNoSurat">-</span>
+                            </div>
+                            <div class="item-row">
+                                <span class="label">Kode</span>
+                                <span class="separator">:</span>
+                                <span class="value" id="valKode">-</span>
+                            </div>
+                            <div class="item-row">
+                                <span class="label">Tanggal</span>
+                                <span class="separator">:</span>
+                                <span class="value" id="valTanggal">-</span>
+                            </div>
                         </div>
-                        <div class="item-row">
-                            <span class="label">Kode</span>
-                            <span class="separator">:</span>
-                            <span class="value" id="valKode">-</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="label">Dari</span>
-                            <span class="separator">:</span>
-                            <span class="value">SMK NEGERI 2 SINGOSARI</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="label">Perihal</span>
-                            <span class="separator">:</span>
-                            <span class="value" id="valPerihal">-</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="label">Tanggal</span>
-                            <span class="separator">:</span>
-                            <span class="value" id="valTanggal">-</span>
+                        <div class="surat-col">
+                            <div class="item-row">
+                                <span class="label">Dari</span>
+                                <span class="separator">:</span>
+                                <span class="value">SMK NEGERI 2 SINGOSARI</span>
+                            </div>
+                            <div class="item-row">
+                                <span class="label">Tujuan</span>
+                                <span class="separator">:</span>
+                                <span class="value" id="valTujuan">-</span>
+                            </div>
+                            <div class="item-row">
+                                <span class="label">Perihal</span>
+                                <span class="separator">:</span>
+                                <span class="value" id="valPerihal">-</span>
+                            </div>
+                            <div class="item-row">
+                                <span class="label">Lampiran</span>
+                                <span class="separator">:</span>
+                                <span class="value">1 Berkas PDF</span>
+                            </div>
                         </div>
                     </div>
 
                     <div class="lampiran-box" id="lampiranBox">
-                        <p>Lihat Lampiran (PDF)</p>
+                        <p>Memuat lampiran...</p>
                     </div>
 
                     <div class="left-button-area" style="margin-top:20px">
@@ -66,7 +80,7 @@
             <!-- KOLOM KANAN -->
             <div class="right-panel">
                 <div class="card">
-                    <h3>Catatan</h3>
+                    <h3>Informasi Disposisi</h3>
 
                     <div class="form-group">
                         <label>Status Surat</label>
@@ -80,7 +94,7 @@
                     <div id="formTerima" class="hidden">
                         <div class="form-group">
                             <label>Catatan</label>
-                            <textarea id="catatanTerima" placeholder="Tulis catatan di sini ..."></textarea>
+                            <textarea id="catatanTerima" placeholder="Masukkan catatan..."></textarea>
                         </div>
                     </div>
 
@@ -92,7 +106,7 @@
                     </div>
 
                     <div class="button-group hidden" id="buttonArea">
-                        <button class="btn-kembali" id="btnTeruskan">Teruskan</button>
+                        <button class="btn-kembali" id="btnTeruskan">← Teruskan</button>
                     </div>
                 </div>
             </div>

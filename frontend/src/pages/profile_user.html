@@ -53,7 +53,7 @@
                         <input type="text" id="jabatanStatic" readonly style="display:none">
                     </div>
 
-                    <a href="gantipass.html" class="btn-link">Ganti Kata Sandi</a>
+                    <a href="#" class="btn-link" id="btnGantiPass">Ganti Kata Sandi</a>
 
                     <button class="btn-logout" id="btnLogout">Keluar</button>
                 </div>
@@ -101,6 +101,13 @@
             };
 
             document.getElementById("btnLogout").addEventListener("click", () => logout());
+
+            // Fix: Set reset_email sebelum navigasi ke gantipass.html
+            document.getElementById("btnGantiPass")?.addEventListener("click", (e) => {
+                e.preventDefault();
+                localStorage.setItem("reset_email", user.email);
+                window.location.href = "gantipass.html";
+            });
         })();
     </script>
 

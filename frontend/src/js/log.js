@@ -258,4 +258,10 @@ document.getElementById('nextPage')?.addEventListener('click', () => {
 });
 
 // Init
-document.addEventListener('DOMContentLoaded', loadActivities);
+document.addEventListener('DOMContentLoaded', () => {
+    const today = new Date().toISOString().split("T")[0];
+    const inputTanggal = document.getElementById("tanggalFilter");
+    if (inputTanggal) inputTanggal.max = today;
+
+    loadActivities();
+});
